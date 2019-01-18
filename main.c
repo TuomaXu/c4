@@ -28,8 +28,6 @@
 
 */
 
-
-
 struct Student
 {
     int yuwen;
@@ -38,13 +36,17 @@ struct Student
     char name[100];
 };
 
+int main()
+{
 
-int main(){
+    struct Student arr[1000];
+    int index = 0;
 
     printf("学生成绩管理系统\n");
 
-    
-    while(1){
+    while (1)
+    {
+
         printf("1---添加学生成绩\n");
         printf("2---删除学生成绩\n");
         printf("3---显示所有学生成绩\n");
@@ -57,39 +59,136 @@ int main(){
         printf("请选择:\n");
 
         int code;
-        scanf("%d",&code);
+        scanf("%d", &code);
 
-        if(code == 1){
+        if (code == 1)
+        {
+            printf("请输入学生姓名:\n");
+            scanf("%s", arr[index].name);
+
+            printf("请输入学生语文成绩:\n");
+            scanf("%d", &(arr[index].yuwen));
+
+            printf("请输入学生数学成绩:\n");
+            scanf("%d", &(arr[index].shuxue));
+
+            printf("请输入学生英语成绩:\n");
+            scanf("%d", &(arr[index].yingyu));
+
+            index++;
+
+            printf("添加完成，点击回车继续\n");
+            char x;
+            scanf("%c", &x);
+            scanf("%c", &x);
+        }
+        if (code == 2)
+        {
 
         }
-        if(code == 2){
+        if (code == 3)
+        {
+            printf("所有学生成绩如下：\n");
+
+            for (int i = 0; i < index; i++)
+            {
+                printf("第%d个学生的姓名为%s，语文成绩为：%d，数学成绩为%d，英语成绩为%d\n", i + 1, arr[i].name, arr[i].yuwen, arr[i].shuxue, arr[i].yingyu);
+            }
+
+            printf("\n点击回车继续\n");
+            char x;
+            scanf("%c", &x);
+            scanf("%c", &x);
+        }
+        if (code == 4)
+        {
+            printf("总分不及格的同学如下：\n");
+            for(int  i = 0; i < index; i++)
+            {
+                int sum = arr[i].yuwen + arr[i].shuxue + arr[i].yingyu;
+                if(sum < 180){
+                    printf("总分不及格的学生姓名为%s，语文：%d，数学%d，英语%d\n",arr[i].name,arr[i].yuwen,arr[i].shuxue,arr[i].yingyu);
+                }
+            }
+            printf("\n点击回车继续\n");
+            char x;
+            scanf("%c", &x);
+            scanf("%c", &x);
             
         }
-        if(code == 3){
+        if (code == 5)
+        {
+            printf("每一科都不及格的学生如下：\n");
+            
+            for(int  i = 0; i < index; i++)
+            {
+                if(arr[i].yuwen < 60 && arr[i].shuxue < 60 && arr[i].yingyu<60){
+                    printf("三科都不及格的学生姓名为%s，语文：%d，数学%d，英语%d\n",arr[i].name,arr[i].yuwen,arr[i].shuxue,arr[i].yingyu);
+                }
+            }
+            printf("\n点击回车继续\n");
+            char x;
+            scanf("%c", &x);
+            scanf("%c", &x);
             
         }
-        if(code == 4){
+        if (code == 6)
+        {
+            printf("总分最高的学生为：\n");
+
+            int max = 0;
+            int stuID = 0;
+            
+            for(int i = 0; i < index; i++)
+            {
+                int sum = arr[i].yuwen + arr[i].shuxue + arr[i].yingyu;
+                if(max < sum){
+                    max  =  sum;
+                    stuID = i;
+                }
+            }
+            printf("总分最高的学生姓名为%s，语文：%d，数学%d，英语%d\n",arr[stuID].name,arr[stuID].yuwen,arr[stuID].shuxue,arr[stuID].yingyu);
+            
+            printf("\n点击回车继续\n");
+            char x;
+            scanf("%c", &x);
+            scanf("%c", &x);
+
+        }
+        if (code == 7)
+        {
+            //先判断，是不是有不及格科目，如果没有，才去比较平均分
+
+            double max = 0.0;
+            int stuID = 0;
+            for(int  i = 0; i < index; i++)
+            {
+                if(arr[i].yuwen >= 60 && arr[i].shuxue >= 60 && arr[i].yingyu >= 60){
+                    double avg = (arr[i].yuwen + arr[i].shuxue + arr[i].yingyu)/3.0;
+                    if(max < avg){
+                        max = avg;
+                        stuID = i;
+                    }
+
+                }
+            }
+
+            printf("平均分最高且没有不及格科目的学生姓名为%s，语文：%d，数学%d，英语%d\n",arr[stuID].name,arr[stuID].yuwen,arr[stuID].shuxue,arr[stuID].yingyu);
+            
+            printf("\n点击回车继续\n");
+            char x;
+            scanf("%c", &x);
+            scanf("%c", &x);
+
+
             
         }
-        if(code == 5){
-            
-        }
-        if(code == 6){
-            
-        }
-        if(code == 7){
-            
-        }
-        if(code == 8){
+        if (code == 8)
+        {
             printf("程序退出\n");
             break;
         }
-
     }
-    
-
-
 
     return 0;
-
 }
